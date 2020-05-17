@@ -1,0 +1,31 @@
+<div class="field">
+    <div class="control">
+        <label class="label" for="">{{label}}</label>
+        <input
+            class="input" 
+            type="text" 
+            [formControl]="control"
+            [ngClass] = "{'is-danger' : showErrors()}"
+            >
+    </div>
+    <ng-container *ngIf="showErrors()">
+        <div class="help is-danger" *ngIf="control.errors.required">This field is Mandatory</div>
+        
+        <div class="help is-danger" *ngIf="control.errors.minlength"> 
+            You should have minimum of
+            {{control.errors.minlength.requiredLength}} characters
+            but you only have
+            {{control.errors.minlength.actualLength}} characters
+        </div>
+
+        <div class="help is-danger" *ngIf="control.errors.maxlength">
+            The maximum length of your input should be {{control.errors.maxlength.requiredLength}} chars
+            but you are entering
+            {{control.errors.maxlength.actualLength}} chars
+        </div>
+
+        <div class="help is-danger" *ngIf="control.errors.pattern">
+            Invalid Value
+        </div>
+    </ng-container>
+</div>
